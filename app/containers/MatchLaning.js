@@ -19,7 +19,6 @@ import * as navigationActions from '../actions/navigation_act';
 import { Actions } from 'react-native-router-flux';
 import Heatmap from '../components/Heatmap';
 
-import { Avatar } from 'react-native-material-design';
 import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
 import { getAbilityImage } from '../utils/getAbilityImage';
@@ -236,7 +235,7 @@ class MatchLaning extends Component {
                     <View style = {{flex: 2,
                         justifyContent: 'center',
                         alignItems: 'center'}}>
-                        <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
+                        <Image source = {staticUri} style = {{width: 40, height: 40, borderRadius: 20}}/>
                     </View>
                     <View style = {styles.cell}>
                         <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.lane}</Text>

@@ -13,7 +13,7 @@ import { bindActionCreators } from 'redux';
 import * as settingsActions from '../actions/settings_act';
 import { Actions } from 'react-native-router-flux';
 
-import { RadioButtonGroup } from 'react-native-material-design';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import _ from 'lodash';
@@ -41,6 +41,13 @@ class Settings extends Component {
         super(props);
         this.onThemeSelected = this.onThemeSelected.bind(this);
         this.setTheme = this.setTheme.bind(this);
+        this.radio_props = [
+            {label: 'OpenDota', value: 1},
+            {label: 'Sky Dolch', value: 2},
+            {label: 'Hyperfuse', value: 3},
+            {label: 'Invisibility', value: 4},
+            {label: 'Double Damage', value: 6}
+        ];
     }
 
     componentDidMount() {
@@ -61,7 +68,7 @@ class Settings extends Component {
             this.props.tracker.trackEvent('Theme Selected', 'Hyperfuse');
         } else if (value === 4) {
             this.props.tracker.trackEvent('Theme Selected', 'Invisibility');
-        } else if (value === 5) {
+        } else if (value === 6) {
             this.props.tracker.trackEvent('Theme Selected', 'Double Damage');
         }
         this.setState({theme: value});
@@ -80,18 +87,11 @@ class Settings extends Component {
                     <View style = {[styles.settingsItemContainer, {backgroundColor: this.props.mod}]}>
                         <View style = {styles.settingsTitle}>
                             <Text style = {[styles.settingsTitleText, { color: this.props.legend}]}>Themes</Text>
-                            <RadioButtonGroup
-                                selected = {this.props.theme}
-                                theme = 'dark'
-                                onSelect = {this.onThemeSelected}
-                                items = {[
-                                    { value: 1, label: 'OpenDota' },
-                                    { value: 2, label: 'Sky Dolch' },
-                                    { value: 3, label: 'Hyperfuse' },
-                                    { value: 5, label: 'Invisibility' },
-                                    { value: 6, label: 'Double Damage' }
-                                ]}
-                            />
+                            <RadioForm
+                                radio_props = {this.radio_props}
+                                initial = {this.props.theme}
+                                onPress = {this.onThemeSelected}
+                                />
                         </View>
                     </View>
                 </KeyboardAwareScrollView>
